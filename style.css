@@ -18,3 +18,13 @@
 /* blinking cursor for transcript lines */
 .t-line.typing::after { content: "▍"; margin-left: 6px; animation: blink 1s steps(1) infinite; opacity: 0.9; }
 @keyframes blink { 50% { opacity: 0; } }
+
+
+/* FAQ boxes */
+#faqBoxes .faq-box { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: 1rem; overflow: hidden; }
+#faqBoxes .faq-toggle { width: 100%; text-align: left; padding: 1rem 3rem 1rem 1.25rem; font-weight: 700; position: relative; }
+#faqBoxes .faq-toggle .faq-icon { position: absolute; right: 1rem; top: 50%; transform: translateY(-50%); font-weight: 800; }
+#faqBoxes .faq-body { display: none; padding: 0 1.25rem 1rem; color: rgb(203 213 225); }
+#faqBoxes .faq-box.open .faq-body { display: block; }
+#faqBoxes .faq-box.open .faq-toggle .faq-icon { content: "–"; }
+.btn-primary, [data-open-book]{ cursor: pointer; }

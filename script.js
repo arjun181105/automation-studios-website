@@ -89,3 +89,14 @@ document.addEventListener('click', (e)=>{
   const t = e.target.closest('[data-open-book]');
   if (t){ e.preventDefault(); openCalModal(); }
 });
+
+// ===== FAQ accordion boxes =====
+document.addEventListener('click', (e)=>{
+  const t = e.target.closest('.faq-toggle');
+  if (!t) return;
+  const box = t.closest('.faq-box');
+  if (!box) return;
+  box.classList.toggle('open');
+  const icon = t.querySelector('.faq-icon');
+  if (icon) icon.textContent = box.classList.contains('open') ? '–' : '+';
+});
