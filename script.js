@@ -67,12 +67,25 @@ function animate() {
 }
 window.addEventListener('load', animate);
 
-// ===== Book Demo: open Cal.com modal in-site =====
-const bookBtns = document.querySelectorAll('[data-open-book]');
-bookBtns.forEach(btn => btn.addEventListener('click', () => {
+// ===== Book Demo: robust Cal.com modal loader =====
+function openCalModal(){
+  const link = "arjun-sharma-l5xsle/ai-automation-demo-call";
+  function openUI(){ try{ Cal("ui", { calLink: link, open: true, layout: "month_view", theme: "dark" }); }catch(e){ window.open("https://cal.com/"+link, "_blank"); } }
   if (window.Cal) {
-    Cal("ui", { calLink: "arjun-sharma-l5xsle/ai-automation-demo-call", open: true, layout: "month_view", theme: "dark" });
+    openUI();
   } else {
-    window.open("https://cal.com/arjun-sharma-l5xsle/ai-automation-demo-call", "_blank");
+    // lazy-load embed then open
+    const s = document.createElement("script");
+    s.src = "https://cal.com/embed.js";
+    s.async = true;
+    s.onload = function(){ try { Cal("init"); openUI(); } catch(e) { window.open("https://cal.com/"+link, "_blank"); } };
+    document.head.appendChild(s);
+    // final fallback after 2s
+    setTimeout(()=>{ if (!window.Cal) window.open("https://cal.com/"+link, "_blank"); }, 2000);
   }
-}));
+}
+// Delegate clicks so it works for future buttons too
+document.addEventListener('click', (e)=>{
+  const t = e.target.closest('[data-open-book]');
+  if (t){ e.preventDefault(); openCalModal(); }
+});
