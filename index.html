@@ -1,21 +1,40 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Automation Studios — AI Receptionists</title>
-  <meta name="description" content="Automation Studios builds AI receptionists that answer calls, book appointments, and convert enquiries — 24/7." />
+  <meta name="description" content="AI receptionists that answer calls, book appointments, and convert enquiries — 24/7.">
   <meta name="theme-color" content="#0ea5e9">
-  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-  <!-- Tailwind CSS via CDN -->
+  <link rel="icon" href="assets/favicon.png">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Automation Studios — AI Receptionists">
+  <meta property="og:description" content="Never miss a client again. 24/7 voice agents that book straight into your calendar.">
+  <meta property="og:url" content="https://arjun181105.github.io/automation-studios-website/">
+  <meta property="og:image" content="assets/og-image.jpg">
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Automation Studios",
+    "url": "https://arjun181105.github.io/automation-studios-website/",
+    "logo": "assets/logo.png",
+    "contactPoint": [{ "@type": "ContactPoint", "telephone": "+61 451 247 525", "contactType": "sales", "areaServed": "AU", "availableLanguage": ["English"] }]
+  }
+  </script>
+
+  <!-- Tailwind CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
       theme: {
         extend: {
-          colors: {
-            brand: { 500: '#06b6d4', 400: '#22d3ee' }
-          },
+          colors: { brand: { 500: '#06b6d4', 400: '#22d3ee' } },
           boxShadow: { soft: '0 10px 30px rgba(0,0,0,.12)' }
         }
       }
@@ -27,7 +46,7 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body class="bg-slate-950 text-slate-100 font-[Inter] selection:bg-brand-400 selection:text-slate-950">
-  <!-- Background gradient lights -->
+  <!-- Decorative glows -->
   <div class="pointer-events-none fixed inset-0 overflow-hidden" aria-hidden="true">
     <div class="absolute -top-24 -left-24 h-96 w-96 rounded-full blur-3xl opacity-30 bg-cyan-500"></div>
     <div class="absolute -bottom-24 -right-24 h-96 w-96 rounded-full blur-3xl opacity-20 bg-fuchsia-500"></div>
@@ -37,16 +56,17 @@
   <header class="sticky top-0 z-50 backdrop-blur supports-[backdrop-filter]:bg-slate-950/60 border-b border-white/10">
     <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
       <a href="#home" class="flex items-center gap-2">
-        <div class="h-8 w-8 grid place-content-center rounded-xl bg-gradient-to-br from-cyan-400 to-blue-600 text-slate-900 font-black">A</div>
+        <img src="assets/logo.png" alt="Automation Studios" class="h-8 w-8 rounded-lg"/>
         <span class="font-extrabold tracking-tight">Automation <span class="text-brand-400">Studios</span></span>
       </a>
       <nav class="hidden md:flex items-center gap-6 text-sm">
         <a href="#services" class="navlink">Services</a>
         <a href="#how" class="navlink">How it works</a>
+        <a href="#demo" class="navlink">Demo</a>
         <a href="#usecases" class="navlink">Use cases</a>
         <a href="#about" class="navlink">About</a>
         <a href="#faq" class="navlink">FAQ</a>
-        <a href="mailto:demo@automationstudios.com?subject=Book%20a%20Demo" class="px-4 py-2 rounded-xl bg-brand-500 hover:bg-brand-400 text-slate-950 font-semibold shadow-soft transition">Book Demo</a>
+        <button data-open-book class="px-4 py-2 rounded-xl bg-brand-500 hover:bg-brand-400 text-slate-950 font-semibold shadow-soft transition">Book Demo</button>
       </nav>
       <button id="menuBtn" class="md:hidden p-2 rounded-lg bg-white/5 hover:bg-white/10 focus:outline-none">
         <span class="sr-only">Open menu</span>
@@ -57,10 +77,11 @@
       <div class="max-w-7xl mx-auto px-4 py-3 grid gap-3 text-sm">
         <a href="#services" class="navlink">Services</a>
         <a href="#how" class="navlink">How it works</a>
+        <a href="#demo" class="navlink">Demo</a>
         <a href="#usecases" class="navlink">Use cases</a>
         <a href="#about" class="navlink">About</a>
         <a href="#faq" class="navlink">FAQ</a>
-        <a href="mailto:demo@automationstudios.com?subject=Book%20a%20Demo" class="px-4 py-2 rounded-xl bg-brand-500 hover:bg-brand-400 text-slate-950 font-semibold shadow-soft text-center">Book Demo</a>
+        <button data-open-book class="px-4 py-2 rounded-xl bg-brand-500 hover:bg-brand-400 text-slate-950 font-semibold shadow-soft text-center">Book Demo</button>
       </div>
     </div>
   </header>
@@ -76,22 +97,22 @@
           We build custom AI receptionists that answer calls, book appointments, and convert enquiries while you focus on running your business.
         </p>
         <div class="mt-8 flex flex-wrap gap-3">
-          <a href="mailto:demo@automationstudios.com?subject=Book%20a%20Demo" class="btn-primary">Book a Free Demo</a>
+          <button data-open-book class="btn-primary">Book a Free Demo</button>
           <a href="#services" class="btn-ghost">See Services</a>
         </div>
         <div class="mt-6 text-sm text-slate-400">Melbourne-based • Fast setup • 24/7 coverage</div>
       </div>
-      <div class="reveal-right">
+      <div class="reveal-right" aria-hidden="true">
         <div class="relative rounded-2xl border border-white/10 p-1 bg-gradient-to-br from-white/10 to-white/5 shadow-soft">
           <div class="rounded-xl bg-slate-900/70 p-6">
             <div class="text-xs text-slate-400 mb-2">Live transcript</div>
             <div class="terminal" aria-label="Animated transcript">
-              <span class="t-line"><b>Caller:</b> Hi, can I book a whitening consult?</span>
-              <span class="t-line"><b>AI:</b> Of course — may I grab your full name and preferred time?</span>
-              <span class="t-line"><b>Caller:</b> Sarah Lee, Friday afternoon.</span>
-              <span class="t-line"><b>AI:</b> Got it. I can do Friday 3:30pm. Confirm?</span>
-              <span class="t-line"><b>Caller:</b> Yes, thanks!</span>
-              <span class="t-line"><b>AI:</b> Locked in. You’ll receive a confirmation SMS shortly.</span>
+              <span class="t-line"><b>Caller:</b> Hi, I’d like to book a whitening consultation.</span>
+              <span class="t-line"><b>AI:</b> Happy to help. May I have your full name?</span>
+              <span class="t-line"><b>Caller:</b> Sarah Lee.</span>
+              <span class="t-line"><b>AI:</b> Thanks Sarah. Friday afternoon is open — does 3:30pm suit?</span>
+              <span class="t-line"><b>Caller:</b> Yes, perfect.</span>
+              <span class="t-line"><b>AI:</b> Locked in for Friday at 3:30pm. You’ll receive a confirmation text shortly.</span>
             </div>
           </div>
         </div>
@@ -102,7 +123,35 @@
   <!-- TRUST -->
   <section class="py-10 border-y border-white/10 bg-slate-900/30">
     <div class="max-w-7xl mx-auto px-4 text-center">
-      <p class="uppercase tracking-widest text-xs text-slate-400">Trusted by appointment‑based businesses across Melbourne — dental clinics, salons, medspas, and home services.</p>
+      <p class="uppercase tracking-widest text-xs text-slate-400">Trusted by appointment‑based businesses across Melbourne — dental clinics, salons, medspas, home services, and automotive dealers.</p>
+    </div>
+  </section>
+
+  <!-- DEMO -->
+  <section id="demo" class="py-20">
+    <div class="max-w-7xl mx-auto px-4 grid md:grid-cols-2 gap-8 items-start">
+      <div class="reveal-left">
+        <h2 class="section-title">Live agent demo</h2>
+        <div class="relative rounded-2xl border border-white/10 p-1 bg-gradient-to-br from-white/10 to-white/5 shadow-soft mt-4">
+          <video class="rounded-xl w-full h-full" controls poster="assets/demo-poster.jpg">
+            <source src="https://cdn.coverr.co/videos/coverr-support-agent-1609/1080p.mp4" type="video/mp4">
+          </video>
+        </div>
+        <p class="text-slate-400 text-sm mt-3">Swap this with your real demo later (MP4 hosted in <code>assets/</code>).</p>
+      </div>
+      <div class="reveal-right">
+        <div class="rounded-2xl border border-white/10 p-4 bg-white/5 shadow-soft">
+          <h3 class="font-bold">Transcript (excerpt)</h3>
+          <div class="terminal mt-3">
+            <span class="t-line"><b>Caller:</b> Hi, do you have availability this Friday?</span>
+            <span class="t-line"><b>AI:</b> Yes — what time works best?</span>
+            <span class="t-line"><b>Caller:</b> Around 3:30pm.</span>
+            <span class="t-line"><b>AI:</b> Great. I’ll book you for 3:30pm with Dr. Patel. May I have your full name and mobile?</span>
+            <span class="t-line"><b>Caller:</b> Sarah Lee, 04xx xxx xxx.</span>
+            <span class="t-line"><b>AI:</b> Thanks Sarah — you’ll receive a confirmation SMS shortly.</span>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -111,34 +160,14 @@
     <div class="max-w-7xl mx-auto px-4">
       <h2 class="section-title">Services</h2>
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
-        <div class="card reveal-up">
-          <h3 class="card-title">AI Receptionist (Voice & Chat)</h3>
-          <p>Answers every call and enquiry in real-time, handles FAQs, triages urgent issues, and books appointments directly.</p>
-        </div>
-        <div class="card reveal-up delay-100">
-          <h3 class="card-title">Appointment Integrations</h3>
-          <p>Connects with Google Calendar, Calendly, Cliniko, Fresha, Timely, Square, and more.</p>
-        </div>
-        <div class="card reveal-up delay-200">
-          <h3 class="card-title">Lead Capture & Qualification</h3>
-          <p>Captures name, number, email, service intent, and urgency — flags high‑value leads instantly.</p>
-        </div>
-        <div class="card reveal-up">
-          <h3 class="card-title">Follow‑Ups & Reminders</h3>
-          <p>Reduce no‑shows with automated SMS/email reminders and post‑call follow‑ups.</p>
-        </div>
-        <div class="card reveal-up delay-100">
-          <h3 class="card-title">Custom Voice & Brand Personality</h3>
-          <p>Friendly, clinical, luxury, or energetic — we tune the voice to fit your brand.</p>
-        </div>
-        <div class="card reveal-up delay-200">
-          <h3 class="card-title">Analytics & Call Reviews</h3>
-          <p>Review transcripts, track bookings, and measure conversion in a clean dashboard.</p>
-        </div>
+        <div class="card reveal-up"><h3 class="card-title">AI Receptionist (Voice & Chat)</h3><p>Answers every call and enquiry in real-time, handles FAQs, triages urgent issues, and books appointments directly.</p></div>
+        <div class="card reveal-up"><h3 class="card-title">Appointment & CRM Integrations</h3><p>Works with Google Calendar, Cliniko, Fresha, Timely, Square, and most major CRMs.</p></div>
+        <div class="card reveal-up"><h3 class="card-title">Lead Capture & Qualification</h3><p>Captures name, number, email, service intent, and urgency — flags high‑value leads instantly.</p></div>
+        <div class="card reveal-up"><h3 class="card-title">Follow‑Ups & Reminders</h3><p>Reduce no‑shows with automated SMS/email reminders and post‑call follow‑ups.</p></div>
+        <div class="card reveal-up"><h3 class="card-title">Custom Voice & Brand Personality</h3><p>Friendly, clinical, luxury, or energetic — we tune the voice to fit your brand.</p></div>
+        <div class="card reveal-up"><h3 class="card-title">Analytics & Call Reviews</h3><p>Review transcripts, track bookings, and measure conversion in a clean dashboard.</p></div>
       </div>
-      <div class="mt-10">
-        <a href="mailto:demo@automationstudios.com?subject=Quote%20Request" class="btn-primary">Get a Custom Quote</a>
-      </div>
+      <div class="mt-10"><button data-open-book class="btn-primary">Get a Custom Quote</button></div>
     </div>
   </section>
 
@@ -147,26 +176,10 @@
     <div class="max-w-7xl mx-auto px-4">
       <h2 class="section-title">How it works</h2>
       <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mt-10">
-        <div class="step reveal-up">
-          <div class="step-num">1</div>
-          <h3 class="card-title">Discovery</h3>
-          <p>15–20 minute call to map services, hours, policies, and booking rules.</p>
-        </div>
-        <div class="step reveal-up delay-100">
-          <div class="step-num">2</div>
-          <h3 class="card-title">Build & Train</h3>
-          <p>We craft the agent’s voice, FAQs, and booking logic; run test calls until perfect.</p>
-        </div>
-        <div class="step reveal-up delay-200">
-          <div class="step-num">3</div>
-          <h3 class="card-title">Integrate & Launch</h3>
-          <p>Connect calendars/CRMs and go live on your number or via call forwarding.</p>
-        </div>
-        <div class="step reveal-up delay-300">
-          <div class="step-num">4</div>
-          <h3 class="card-title">Optimise</h3>
-          <p>Weekly reviews of transcripts and results to improve conversion & CX.</p>
-        </div>
+        <div class="step reveal-up"><div class="step-num">1</div><h3 class="card-title">Discovery</h3><p>15–20 minute call to map services, hours, policies, and booking rules.</p></div>
+        <div class="step reveal-up"><div class="step-num">2</div><h3 class="card-title">Build & Train</h3><p>We craft the agent’s voice, FAQs, and booking logic; run test calls until perfect.</p></div>
+        <div class="step reveal-up"><div class="step-num">3</div><h3 class="card-title">Integrate & Launch</h3><p>Connect calendars/CRMs and go live on your number or via call forwarding.</p></div>
+        <div class="step reveal-up"><div class="step-num">4</div><h3 class="card-title">Optimise</h3><p>Weekly reviews of transcripts and results to improve conversion & CX.</p></div>
       </div>
     </div>
   </section>
@@ -176,22 +189,12 @@
     <div class="max-w-7xl mx-auto px-4">
       <h2 class="section-title">Use cases</h2>
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
-        <div class="card reveal-up">
-          <h3 class="card-title">Dental & Medical Clinics</h3>
-          <p>New patient intake, urgent triage, and cancellations filled fast.</p>
-        </div>
-        <div class="card reveal-up delay-100">
-          <h3 class="card-title">Salons & Medspas</h3>
-          <p>Treatment enquiries, pre‑care/post‑care info, deposit handling.</p>
-        </div>
-        <div class="card reveal-up delay-200">
-          <h3 class="card-title">Home Services</h3>
-          <p>Quotes, on‑site scheduling, and emergency call routing.</p>
-        </div>
+        <div class="card reveal-up"><h3 class="card-title">Dental & Medical Clinics</h3><p>New patient intake, urgent triage, and cancellations filled fast.</p></div>
+        <div class="card reveal-up"><h3 class="card-title">Salons & Medspas</h3><p>Treatment enquiries, pre‑care/post‑care info, deposit handling.</p></div>
+        <div class="card reveal-up"><h3 class="card-title">Home Services</h3><p>Quotes, on‑site scheduling, and emergency call routing.</p></div>
+        <div class="card reveal-up"><h3 class="card-title">Automotive Dealers</h3><p>Capture leads, qualify test‑drive requests, and manage service bookings instantly.</p></div>
       </div>
-      <div class="mt-10">
-        <a href="mailto:demo@automationstudios.com?subject=Book%20a%20Demo" class="btn-primary">See It In Action</a>
-      </div>
+      <div class="mt-10"><button data-open-book class="btn-primary">See It In Action</button></div>
     </div>
   </section>
 
@@ -210,9 +213,9 @@
           <li>• <b>Results</b> — Measurable increases in bookings & responsiveness.</li>
         </ul>
       </div>
-      <div class="reveal-right">
+      <div class="reveal-right" aria-hidden="true">
         <div class="relative rounded-2xl border border-white/10 p-1 bg-gradient-to-br from-white/10 to-white/5 shadow-soft">
-          <video class="rounded-xl w-full h-full" autoplay loop muted playsinline>
+          <video class="rounded-xl w-full h-full" autoplay loop muted playsinline poster="assets/demo-poster.jpg">
             <source src="https://cdn.coverr.co/videos/coverr-support-agent-1609/1080p.mp4" type="video/mp4">
           </video>
         </div>
@@ -224,32 +227,17 @@
   <section id="faq" class="py-20">
     <div class="max-w-4xl mx-auto px-4">
       <h2 class="section-title text-center">FAQ</h2>
-      <div class="mt-10 grid gap-4">
-        <details class="faq-item reveal-up">
-          <summary>How long does setup take?</summary>
-          <p>Most go live in <b>5–10 days</b> depending on integrations.</p>
-        </details>
-        <details class="faq-item reveal-up delay-100">
-          <summary>Does it work after hours?</summary>
-          <p>Yes — your AI receptionist runs <b>24/7</b> so you never miss a client.</p>
-        </details>
-        <details class="faq-item reveal-up delay-200">
-          <summary>Will it integrate with our tools?</summary>
-          <p>We support popular calendars, CRMs, and booking systems like Google Calendar, Calendly, Cliniko, Fresha, Timely, and Square.</p>
-        </details>
-        <details class="faq-item reveal-up delay-300">
-          <summary>How much does it cost?</summary>
-          <p>We tailor quotes by niche, call volume, and integrations. <a href="mailto:demo@automationstudios.com?subject=Pricing%20Enquiry" class="underline decoration-brand-400">Email us</a> and we’ll prepare a clear proposal.</p>
-        </details>
-        <details class="faq-item reveal-up delay-300">
-          <summary>What about privacy & security?</summary>
-          <p>We use strict data minimisation and access controls. Transcripts and data are stored securely and shared only with you.</p>
-        </details>
+      <div class="mt-10 grid gap-4 reveal-up-group">
+        <details class="faq-item"><summary>How long does setup take?</summary><p>Most go live in <b>5–10 days</b> depending on integrations.</p></details>
+        <details class="faq-item"><summary>Does it work after hours?</summary><p>Yes — your AI receptionist runs <b>24/7</b> so you never miss a client.</p></details>
+        <details class="faq-item"><summary>Will it integrate with our tools?</summary><p>We support popular calendars, booking systems and <b>most major CRMs</b> like Google Calendar, Cliniko, Fresha, Timely, and Square. If you use something specific, we’ll confirm compatibility during onboarding.</p></details>
+        <details class="faq-item"><summary>How much does it cost?</summary><p>We tailor quotes by niche, call volume, and integrations. Click <b>Book Demo</b> and we’ll prepare a clear proposal.</p></details>
+        <details class="faq-item"><summary>What about privacy & security?</summary><p>We use strict data minimisation and access controls. Transcripts and data are stored securely and shared only with you.</p></details>
       </div>
     </div>
   </section>
 
-  <!-- CONTACT -->
+  <!-- CONTACT STRIP -->
   <section id="contact" class="py-20">
     <div class="max-w-4xl mx-auto px-4 text-center">
       <p class="text-slate-300">Email
@@ -265,9 +253,29 @@
     <div>© <span id="year"></span> Automation Studios — All rights reserved</div>
   </footer>
 
-  <!-- GSAP for buttery animations -->
+  <!-- Cal.com embed (modal) -->
+  <script>
+    (function(C,A,L){var p=function(a,r){a.q=a.q||[];a.q.push(r)};var i=C.createElement("script");i.async=1;i.src="https://cal.com/embed.js";C.getElementsByTagName("head")[0].appendChild(i);A.Cal=A.Cal||function(){var method=arguments[0]; if(['init','ui'].indexOf(method)>-1){p(A.Cal, arguments)} };})(document, window);
+    Cal("init");
+  </script>
+
+  <!-- GSAP -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" referrerpolicy="no-referrer"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" referrerpolicy="no-referrer"></script>
-  <script src="script.js"></script>
+
+  <!-- Retell Chat Widget • Kylie -->
+  <script
+    id="retell-widget"
+    src="https://dashboard.retellai.com/retell-widget.js"
+    type="module"
+    data-public-key="public_key_ce0df378379dd75ea469e"
+    data-agent-id="agent_64fa00b1952113598af511c52b"
+    data-agent-version="latest"
+    data-title="Hi, I’m Kylie — how can I help?"
+    data-logo-url="assets/logo.png"
+    data-color="#06b6d4"
+  ></script>
+
+  <script src="script.js" defer></script>
 </body>
 </html>

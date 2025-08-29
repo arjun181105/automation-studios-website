@@ -1,12 +1,15 @@
-// Mobile nav
+// ===== Config =====
+const CAL_LINK = "arjun-sharma-l5xsle/ai-automation-demo-call";
+
+// ===== Mobile nav =====
 const menuBtn = document.getElementById('menuBtn');
 const mobileMenu = document.getElementById('mobileMenu');
 if (menuBtn) menuBtn.addEventListener('click', ()=> mobileMenu.classList.toggle('hidden'));
 
-// Year
+// ===== Year =====
 document.getElementById('year').textContent = new Date().getFullYear();
 
-// Smooth scroll for in-page anchors
+// ===== Smooth scroll =====
 document.querySelectorAll('a[href^="#"]').forEach(a => {
   a.addEventListener('click', (e) => {
     const targetId = a.getAttribute('href').substring(1);
@@ -20,22 +23,56 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   });
 });
 
-// GSAP animations
+// ===== GSAP animations (refined slower) =====
 function animate() {
   if (!window.gsap) return;
-  const tl = gsap.timeline({ defaults: { ease: "power2.out", duration: .8 } });
-  tl.fromTo('.reveal-left', {x:-40, opacity:0}, {x:0, opacity:1, stagger:.15});
-  tl.fromTo('.reveal-right', {x:40, opacity:0}, {x:0, opacity:1, stagger:.15}, "<");
-  gsap.utils.toArray('.reveal-up').forEach((el) => {
-    gsap.fromTo(el, {y:24, opacity:0}, {
+
+  const D = 1.25; // base duration slower
+  const STAG = 0.14; // gentle stagger
+
+  // Hero
+  const tl = gsap.timeline({ defaults: { ease: "power2.out", duration: D } });
+  tl.fromTo('.reveal-left',  { x:-36, opacity:0 }, { x:0, opacity:1 })
+    .fromTo('.reveal-right', { x: 36, opacity:0 }, { x:0, opacity:1 }, "<");
+
+  function groupReveal(sectionSel, useStagger = true) {
+    const section = document.querySelector(sectionSel);
+    if (!section) return;
+    const items = section.querySelectorAll('.reveal-up, .card, .step, .faq-item, .reveal-up-group > *');
+    if (!items.length) return;
+
+    gsap.set(items, { y:24, opacity:0 });
+    gsap.to(items, {
       y:0, opacity:1,
-      scrollTrigger: { trigger: el, start: "top 85%" }
+      duration: D,
+      ease: "power2.out",
+      stagger: useStagger ? STAG : 0,
+      scrollTrigger: { trigger: section, start: "top 82%" }
     });
-  });
-  // typing-like transcript reveal
+  }
+
+  groupReveal('#services', true);
+  groupReveal('#how', true);
+  groupReveal('#usecases', true);
+  groupReveal('#faq', false);
+
+  // Transcript lines (slower + typing cursor)
   const lines = document.querySelectorAll('.t-line');
   lines.forEach((line, i) => {
-    gsap.to(line, {opacity:1, x:0, delay: .2 + i * .6});
+    gsap.to(line, { opacity:1, x:0, delay: .5 + i * 1.2, onStart(){
+      line.classList.add('typing');
+      setTimeout(()=> line.classList.remove('typing'), 1000);
+    } });
   });
 }
 window.addEventListener('load', animate);
+
+// ===== Book Demo: open Cal.com modal in-site =====
+const bookBtns = document.querySelectorAll('[data-open-book]');
+bookBtns.forEach(btn => btn.addEventListener('click', () => {
+  if (window.Cal) {
+    Cal("ui", { calLink: "arjun-sharma-l5xsle/ai-automation-demo-call", open: true, layout: "month_view", theme: "dark" });
+  } else {
+    window.open("https://cal.com/arjun-sharma-l5xsle/ai-automation-demo-call", "_blank");
+  }
+}));

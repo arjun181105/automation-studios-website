@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://arjun181105.github.io/automation-studios-website/sitemap.xml
